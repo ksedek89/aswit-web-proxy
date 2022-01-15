@@ -1,0 +1,11 @@
+
+scp -r aswit-web-proxy  217.182.75.190:/u01/docker
+
+scp -r aswit-web-proxy/default.conf  217.182.75.190:/u01/docker/aswit-web-proxy/default.conf
+
+
+trzeba dodać propertisy do wp-config.php:
+define('WP_HOME','http://blog.aswit.pl');
+define('WP_SITEURL','http://blog.aswit.pl');
+lub zmienić w konsoli
+https://serverpilot.io/docs/solution-to-wordpress-showing-ip-address-instead-of-domain/
