@@ -1,0 +1,1 @@
+scp -r build/ ksedek@217.182.75.190:/u01/docker/aswit-fe

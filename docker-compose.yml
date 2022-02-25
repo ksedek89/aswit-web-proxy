@@ -4,10 +4,10 @@ services:
     image: nginx:latest
     container_name: aswit-web-proxy
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./default.conf:/etc/nginx/conf.d/default.conf
-      - ./main.html:/usr/share/nginx/html/main.html
-      - ./podcasty.html:/usr/share/nginx/html/podcasty.html
+      - /u01/volumes/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /u01/volumes/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /u01/ssl:/etc/nginx/certs
+      - /u01/containers/aswit-fe/build:/usr/share/nginx/build
     ports:
       - 80:80
       - 443:443
@@ -22,7 +22,7 @@ services:
       WORDPRESS_DB_PASSWORD: zAPmBDHcPZq52pBidOOJ
       WORDPRESS_DB_NAME: wordpress
     volumes:
-      - wordpress:/var/www/html
+      - /u01/volumes/wordpress:/var/www/html
   wordpress-db:
     image: mariadb:10.6.0
     ports:
@@ -34,20 +34,4 @@ services:
       MYSQL_PASSWORD: zAPmBDHcPZq52pBidOOJ
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
-      - wordpress-db:/var/lib/mysql
-  aswit-db:
-    image: mariadb:10.6.0
-    ports:
-      - 3308:3306
-    container_name: aswit-db
-    environment:
-      MYSQL_DATABASE: aswit
-      MYSQL_USER: aswit
-      MYSQL_PASSWORD: hHGn6nveOwCn3w2uUKyG
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
-    volumes:
-      - aswit-db:/var/lib/mysql
-volumes:
-  wordpress:
-  wordpress-db:
-  aswit-db:
+      - /u01/volumes/wordpress-db:/var/lib/mysql
